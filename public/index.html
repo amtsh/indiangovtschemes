@@ -1,65 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Govt Schemes Management</title>
-    <link rel="stylesheet" type="text/css" href="css/bulma.css">
-    <style type="text/css">
-      body {
-        margin-left: 5em;
-        margin-top: 5em;
-        margin-right: 5em;
-      }
-
-      .scheme-form {
-        margin: auto;
-        width: 40%;
-      }
-
-      label.checkbox {
-       margin-right: 25px;
-      }
-
-      .submit-cancel {
-        margin-top: 2em;
-      }
-    </style>
+  <title>Goverment Schemes</title>
+  <link rel="stylesheet" type="text/css" href="css/bulma.css">
 </head>
+<style type="text/css">
+  body {
+    margin-left: 5em;
+    margin-top: 5em;
+  }
+  label.checkbox {
+    margin-right: 25px;
+  }
+  p.control {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .schemes {
+    margin-right: 5em;
+  }
 
-<div class="notification" ng-if="status.length">
-  <button class="delete"></button>
-  {{ status }}
-</div>
+</style>
+<body>
 
-<body ng-controller="MainCtrl">
-
-<div class="scheme-form">
-  <label class="label">Name of the Scheme</label>
+  <label class="label">Gender</label>
   <p class="control">
-    <input class="input" type="text" placeholder="Pradhan Mantri Suraksha Bima Yojana (PMSBY)" ng-model="scheme.title">
+    <label class="radio">
+      <input type="radio" name="question">
+      Male
+    </label>
+    <label class="radio">
+      <input type="radio" name="question">
+      Female
+    </label>
   </p>
 
-  <label class="label">What is the scheme ?</label>
+  <label class="label">Age</label>
   <p class="control">
-    <textarea class="textarea" placeholder="" ng-model="scheme.description.what"></textarea>
+    <a class="button is-white">17</a>
+    <a class="button is-white">18</a>
+    <a class="button is-white">19</a>
+    <a class="button is-white">20</a>
+    <a class="button is-white">21</a>
+    <a class="button is-white">22</a>
+    <a class="button is-white">23</a>
+    <a class="button is-white">24</a>
+    <a class="button is-white">25</a>
   </p>
 
-  <label class="label">Who is this scheme for?</label>
-  <p class="control">
-    <textarea class="textarea" placeholder="" ng-model="scheme.description.who"></textarea>
-  </p>
-
-  <label class="label">Scheme start date</label>
-  <p class="control">
-    <input class="input" type="text" placeholder=" 1 Jan 2016" ng-model="scheme.description.date">
-  </p>
-
-  <label class="label">Scheme source document</label>
-  <p class="control">
-    <input class="input" type="text" placeholder="https://india.gov.in/document/12" ng-model="scheme.schemesource">
-  </p>
-
-  <label class="label">Tags</label>
+  <label class="label">Select category</label>
   <p class="control" id="caste-category">
     <label class="checkbox">
       <input id="open" type="checkbox">
@@ -87,29 +76,17 @@
     </label>
   </p>
 
-  <div class="control is-grouped submit-cancel">
-    <p class="control">
-      <button class="button is-primary" ng-click="submitScheme(scheme)">Submit</button>
-    </p>
-    <p class="control">
-      <button class="button is-link" ng-click="resetForm()">Cancel</button>
-    </p>
-  </div>
-</div>
+  <hr style="margin-top: 5em; margin-right: 5em">
 
-<hr style="margin-top: 5em; margin-right: 5em">
-
-<div>
-  <h1 class="title">Schemes</h1>
-
+  <label class="label">Schemes</label>
   <p class="control">
     <div class="schemes">
-      <div class="columns is-multiline grid">
-        <div ng-repeat="scheme in schemes track by scheme._links.scheme.href" class="column is-one-third grid-item">
+      <div class="columns grid">
+        <div class="column is-one-third grid-item scst">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
-                {{ scheme.title }}
+                Pradhan Mantri Suraksha Bima Yojana (PMSBY)
               </p>
               <a class="card-header-icon">
                 <span class="icon">
@@ -119,41 +96,137 @@
             </header>
             <div class="card-content">
               <div class="content">
-                <strong>What : </strong>{{ scheme.description.what }}
+                <strong>What : </strong>Life Insurance - accidental death (Cover of 2 lakh) cum disability (Cover of 1 lakh) Premium: Rs. 12/- per annum per subscriber
                 <br>
                 <br>
-                <strong>Who : </strong>{{ scheme.description.who }}
+                <strong>Who : </strong>age group of 18 to 70 years. Should be savings bank account holder.
                 <br>
-                <small>{{ scheme.description.date }}</small>
+                <small>11:09 PM - 1 Jan 2016</small>
               </div>
             </div>
             <footer class="card-footer">
               <a class="card-footer-item">How to apply</a>
-              <a href="{{ scheme.schemesource }}" class="card-footer-item">Read more</a>
+              <a class="card-footer-item">Read more</a>
             </footer>
+          </div>
+        </div>
+        <div class="column is-one-third grid-item open">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Pradhan Mantri Jeevan Jyoti Bima (PMJJBY)
+              </p>
+              <a class="card-header-icon">
+                <span class="icon">
+                  <i class="fa fa-angle-down"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <strong>What : </strong>Life Insurance - covering death due to any reason (Cover of 2 lakh)
+Premium: Rs.330/- per annum per subscriber
+                <br>
+                <br>
+                <strong>Who : </strong>age group of 18 to 70 years. Should be savings bank account holder.
+                <br>
+                <small>11:09 PM - 1 Jan 2016</small>
+              </div>
+            </div>
             <footer class="card-footer">
-              <a href="#" class="card-footer-item" ng-click="copyScheme(scheme)">Copy</a>
-              <a href="#" class="card-footer-item" ng-click="editScheme(scheme)">Edit</a>
-              <a class="card-footer-item" ng-click="removeScheme(scheme)">Delete</a>
+              <a class="card-footer-item">How to apply</a>
+              <a class="card-footer-item">Read more</a>
+            </footer>
+          </div>
+        </div>
+        <div class="column is-one-third grid-item open">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                The Atal Pension Yojana (APY)
+              </p>
+              <a class="card-header-icon">
+                <span class="icon">
+                  <i class="fa fa-angle-down"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <strong>What : </strong>Pension scheme for unorganised sector
+Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs. 5000 per month starting at the age of 60 years.
+                <br>
+                <br>
+                <strong>Who : </strong>age group of 18 to 40 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
+                <br>
+                <small>11:09 PM - 1 Jan 2016</small>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a class="card-footer-item">How to apply</a>
+              <a class="card-footer-item">Read more</a>
+            </footer>
+          </div>
+        </div>
+        <div class="column is-one-third grid-item open">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                The Atal Pension Yojana (APY)
+              </p>
+              <a class="card-header-icon">
+                <span class="icon">
+                  <i class="fa fa-angle-down"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <strong>What : </strong>Pension scheme for unorganised sector
+Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs. 5000 per month starting at the age of 60 years.
+                <br>
+                <br>
+                <strong>Who : </strong>age group of 18 to 40 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
+                <br>
+                <small>11:09 PM - 1 Jan 2016</small>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a class="card-footer-item">How to apply</a>
+              <a class="card-footer-item">Read more</a>
             </footer>
           </div>
         </div>
       </div>
     </div>
   </p>
-</div>
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+  <script type="text/javascript">
+    var $grid = $('.grid').isotope({
+      // options
+      itemSelector: '.grid-item',
+      layoutMode: 'fitRows'
+    })
+    var allCategory = '.open, .obc, .scst, .bpt, .disability'
+    $grid.isotope({ filter: allCategory })
 
+    var category = []
 
-<!--<script type="text/javascript" src="js/lodash_4.17.4.js"></script>-->
-<!--<script type="text/javascript" src="js/angular_1.6.1.js"></script>-->
+    $("#caste-category :checkbox").change(function() {
+      var elemClass = '.' + this.id
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+      if (this.checked) {
+        category.push(elemClass)
+      } else {
+        var index = category.indexOf(index)
+        category.splice(index, 1)
+      }
 
+      $grid.isotope({ filter: category.join('') })
 
-<script type="text/javascript" src="js/app/app.js"></script>
-<script type="text/javascript" src="js/app/MainCtrl.js"></script>
-<script type="text/javascript" src="js/app/apiService.js"></script>
-
-</body>
+      console.log(category)
+    });
+  </script>
 </html>
+<!-- http://isotope.metafizzy.co/filtering.html -->
