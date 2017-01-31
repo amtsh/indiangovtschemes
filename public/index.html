@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Govt Schemes Management</title>
+    <link rel="stylesheet" type="text/css" href="css/bulma.css">
+    <style type="text/css">
+      body {
+        margin-left: 5em;
+        margin-top: 5em;
+        margin-right: 5em;
+      }
+
+      .scheme-form {
+        margin: auto;
+        width: 40%;
+      }
+
+      label.checkbox {
+       margin-right: 25px;
+      }
+
+      .submit-cancel {
+        margin-top: 2em;
+      }
+    </style>
+</head>
+
+<div class="notification" ng-if="status.length">
+  <button class="delete"></button>
+  {{ status }}
+</div>
+
+<body ng-controller="MainCtrl">
+
+<div class="scheme-form">
+  <label class="label">Name of the Scheme</label>
+  <p class="control">
+    <input class="input" type="text" placeholder="Pradhan Mantri Suraksha Bima Yojana (PMSBY)" ng-model="scheme.title">
+  </p>
+
+  <label class="label">What is the scheme ?</label>
+  <p class="control">
+    <textarea class="textarea" placeholder="" ng-model="scheme.description.what"></textarea>
+  </p>
+
+  <label class="label">Who is this scheme for?</label>
+  <p class="control">
+    <textarea class="textarea" placeholder="" ng-model="scheme.description.who"></textarea>
+  </p>
+
+  <label class="label">Scheme start date</label>
+  <p class="control">
+    <input class="input" type="text" placeholder=" 1 Jan 2016" ng-model="scheme.description.date">
+  </p>
+
+  <label class="label">Scheme source document</label>
+  <p class="control">
+    <input class="input" type="text" placeholder="https://india.gov.in/document/12" ng-model="scheme.schemesource">
+  </p>
+
+  <label class="label">Tags</label>
+  <p class="control" id="caste-category">
+    <label class="checkbox">
+      <input id="open" type="checkbox">
+      Open
+    </label>
+
+    <label class="checkbox">
+      <input id="obc" type="checkbox">
+      OBC
+    </label>
+
+    <label class="checkbox">
+      <input id="scst" type="checkbox">
+      SC/ST
+    </label>
+
+    <label class="checkbox">
+      <input id="bpt" type="checkbox">
+      Below Poverty Line
+    </label>
+
+    <label class="checkbox">
+      <input id="disability" type="checkbox">
+      Disabled person
+    </label>
+  </p>
+
+  <div class="control is-grouped submit-cancel">
+    <p class="control">
+      <button class="button is-primary" ng-click="submitScheme(scheme)">Submit</button>
+    </p>
+    <p class="control">
+      <button class="button is-link" ng-click="resetForm()">Cancel</button>
+    </p>
+  </div>
+</div>
+
+<hr style="margin-top: 5em; margin-right: 5em">
+
+<div>
+  <h1 class="title">Schemes</h1>
+
+  <p class="control">
+    <div class="schemes">
+      <div class="columns is-multiline grid">
+        <div ng-repeat="scheme in schemes track by scheme._links.scheme.href" class="column is-one-third grid-item">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                {{ scheme.title }}
+              </p>
+              <a class="card-header-icon">
+                <span class="icon">
+                  <i class="fa fa-angle-down"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <strong>What : </strong>{{ scheme.description.what }}
+                <br>
+                <br>
+                <strong>Who : </strong>{{ scheme.description.who }}
+                <br>
+                <small>{{ scheme.description.date }}</small>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a class="card-footer-item">How to apply</a>
+              <a href="{{ scheme.schemesource }}" class="card-footer-item">Read more</a>
+            </footer>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item" ng-click="copyScheme(scheme)">Copy</a>
+              <a href="#" class="card-footer-item" ng-click="editScheme(scheme)">Edit</a>
+              <a class="card-footer-item" ng-click="removeScheme(scheme)">Delete</a>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p>
+</div>
+
+
+<!--<script type="text/javascript" src="js/lodash_4.17.4.js"></script>-->
+<!--<script type="text/javascript" src="js/angular_1.6.1.js"></script>-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
+
+<script type="text/javascript" src="js/app/app.js"></script>
+<script type="text/javascript" src="js/app/MainCtrl.js"></script>
+<script type="text/javascript" src="js/app/apiService.js"></script>
+
+</body>
+</html>
