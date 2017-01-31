@@ -1,9 +1,10 @@
 ### Indian Government Schemes
 
-*Goal of this project*
+**Goal of this project**
+
 A SpringBoot application aimed to organize Indian government schemes, so that a person of certain age, caste and gender can easily find relevant schemes. Edit
 
-*How to Run*
+**How to Run**
 
 1. Start mongodb server locally
 2.
