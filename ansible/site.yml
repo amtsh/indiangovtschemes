@@ -1,0 +1,51 @@
+---
+- name: Deploy Scheme Manager on AWS
+  hosts: schememanager
+  user: ec2-user
+
+  tasks:
+    - name: Clone the source from github
+      git:
+        repo: https://github.com/amtsh/indiangovtschemes.git
+        dest: "{{ work_dir }}/indiangovtschemes"
+        version: master
+
+    - name: Build source
+      shell: ./gradlew clean jar
+      args:
+        chdir: "{{ work_dir }}/indiangovtschemes"
+
+
+    - name: Check if java process is running
+      shell: ps -ef | grep java | grep "govtschemes" | wc -l
+      register: is_running
+
+    - name: print
+      debug:
+        msg: "{{ is_running }}"
+
+    - name: Get process ID of java process
+      shell: ps -ef | grep java | grep 'govtschemes'  | awk '{print $2}'
+      register: java_process_id
+      when: is_running == "2"
+
+    - name: Stop java process
+      shell: kill -9 {{ java_process_id }}
+      when: is_running == "2"
+
+    - name: print
+      debug:
+        msg: "{{ java_process_id }}"
+
+    - name: Deploy jar
+      copy:
+        src: "{{ work_dir }}/indiangovtschemes/{{ jar_build_path }}"
+        dest: "{{ service_dir }}"
+      when: is_running == "2"
+
+    - name: Start java process
+      shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar
+      args:
+        chdir: "{{ service_dir }}"
+
+
