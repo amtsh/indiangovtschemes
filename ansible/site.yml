@@ -46,7 +46,7 @@
         src: "{{ work_dir }}/indiangovtschemes/{{ jar_build_path }}"
         dest: "{{ service_dir }}"
 
-    # - name: Start java process
-    #   shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` > start.log &
-    #   args:
-    #     chdir: "{{ service_dir }}"
+    - name: Start java process
+      shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` >> start.log &
+      args:
+        chdir: "{{ service_dir }}"
