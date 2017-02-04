@@ -1,6 +1,6 @@
 ---
 - name: Deploy Scheme Manager on AWS
-  hosts: schememanager
+  hosts: scheme_mgmt_pro
   user: ec2-user
 
   tasks:
@@ -11,41 +11,42 @@
         version: master
 
     - name: Build source
-      shell: ./gradlew clean jar
+      shell: ./gradlew clean build -x test
       args:
         chdir: "{{ work_dir }}/indiangovtschemes"
 
-
     - name: Check if java process is running
-      shell: ps -ef | grep java | grep "govtschemes" | wc -l
+      shell: ps -ef | grep java | grep 'govtschemes' | grep -v 'grep' | wc -l
       register: is_running
 
-    - name: print
-      debug:
-        msg: "{{ is_running }}"
-
     - name: Get process ID of java process
-      shell: ps -ef | grep java | grep 'govtschemes'  | awk '{print $2}'
+      shell: ps -ef | grep java | grep 'govtschemes' | grep -v 'grep' | awk '{print $2}'
       register: java_process_id
-      when: is_running == "2"
+      when: is_running.stdout == "1"
 
     - name: Stop java process
-      shell: kill -9 {{ java_process_id }}
-      when: is_running == "2"
+      shell: kill -9 {{ java_process_id.stdout }}
+      when: is_running.stdout == "1"
 
-    - name: print
-      debug:
-        msg: "{{ java_process_id }}"
+    - name: Release static assets
+      copy:
+        remote_src: True
+        directory_mode: yes
+        src: "{{ work_dir }}/indiangovtschemes/{{ assets_dir }}"
+        dest: "{{ service_dir }}"
+
+    - name: Ensure service dir exists
+      file:
+        path: "{{ service_dir }}"
+        state: directory
 
     - name: Deploy jar
       copy:
+        remote_src: True
         src: "{{ work_dir }}/indiangovtschemes/{{ jar_build_path }}"
         dest: "{{ service_dir }}"
-      when: is_running == "2"
 
-    - name: Start java process
-      shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar
-      args:
-        chdir: "{{ service_dir }}"
-
-
+    # - name: Start java process
+    #   shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` > start.log &
+    #   args:
+    #     chdir: "{{ service_dir }}"

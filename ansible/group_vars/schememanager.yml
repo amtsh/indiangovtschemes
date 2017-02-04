@@ -1,8 +1,0 @@
-project_name: indiangovtschemes
-
-home_dir: /home/ec2-user
-work_dir: "{{ home_dir }}/work"
-
-jar_build_path: build/libs/govtschemes-0.0.1-SNAPSHOT.jar
-
-service_dir: "{{ home_dir }}/govtschemes"
