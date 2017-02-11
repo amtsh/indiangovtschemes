@@ -43,6 +43,6 @@
         dest: "{{ service_dir }}"
 
     - name: Start java process
-      shell: nohup java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` >> start.log &
+      shell: nohup java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` > start.log &
       args:
         chdir: "{{ service_dir }}"
