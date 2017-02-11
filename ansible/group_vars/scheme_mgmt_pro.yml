@@ -3,6 +3,7 @@ project_name: indiangovtschemes
 home_dir: /home/ec2-user
 work_dir: "{{ home_dir }}/work"
 
+build_dir: "{{ work_dir }}/{{ project_name }}"
 service_dir: "{{ home_dir }}/service/govtschemes/"
 
 assets_dir: public

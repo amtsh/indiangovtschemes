@@ -28,17 +28,13 @@
       shell: kill -9 {{ java_process_id.stdout }}
       when: is_running.stdout == "1"
 
-    - name: Release static assets
-      copy:
-        remote_src: True
-        directory_mode: yes
-        src: "{{ work_dir }}/indiangovtschemes/{{ assets_dir }}"
-        dest: "{{ service_dir }}"
-
     - name: Ensure service dir exists
       file:
         path: "{{ service_dir }}"
         state: directory
+
+    - name: Release static assets
+      shell: cp -r "{{ build_dir }}/{{ assets_dir }}" "{{ service_dir }}"
 
     - name: Deploy jar
       copy:
@@ -47,6 +43,6 @@
         dest: "{{ service_dir }}"
 
     - name: Start java process
-      shell: java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` >> start.log &
+      shell: nohup java -Dspring.profiles.active=production -jar govtschemes-0.0.1-SNAPSHOT.jar --spring.data.mongodb.uri=`cat $HOME/env.txt` >> start.log &
       args:
         chdir: "{{ service_dir }}"
