@@ -36,7 +36,7 @@
   </p>
 
   <label class="label">Age</label>
-  <p class="control">
+  <p class="control" id="age-selector">
     <a class="button is-white">17</a>
     <a class="button is-white">18</a>
     <a class="button is-white">19</a>
@@ -49,29 +49,29 @@
   </p>
 
   <label class="label">Select category</label>
-  <p class="control" id="caste-category">
+  <p class="control" id="category-selector">
     <label class="checkbox">
-      <input id="open" type="checkbox">
+      <input type="checkbox" value=".open">
       Open
     </label>
 
     <label class="checkbox">
-      <input id="obc" type="checkbox">
+      <input type="checkbox" value=".obc">
       OBC
     </label>
 
     <label class="checkbox">
-      <input id="scst" type="checkbox">
+      <input type="checkbox" value=".scst">
       SC/ST
     </label>
 
     <label class="checkbox">
-      <input id="bpt" type="checkbox">
+      <input type="checkbox" value=".bpt">
       Below Poverty Line
     </label>
 
     <label class="checkbox">
-      <input id="disability" type="checkbox">
+      <input type="checkbox" value=".disability">
       Disabled person
     </label>
   </p>
@@ -82,7 +82,7 @@
   <p class="control">
     <div class="schemes">
       <div class="columns grid">
-        <div class="column is-one-third grid-item scst">
+        <div class="column is-one-third grid-item scst" data-age="1870">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
@@ -110,7 +110,7 @@
             </footer>
           </div>
         </div>
-        <div class="column is-one-third grid-item open">
+        <div class="column is-one-third grid-item open" data-age="1770">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
@@ -128,7 +128,7 @@
 Premium: Rs.330/- per annum per subscriber
                 <br>
                 <br>
-                <strong>Who : </strong>age group of 18 to 70 years. Should be savings bank account holder.
+                <strong>Who : </strong>age group of 17 to 70 years. Should be savings bank account holder.
                 <br>
                 <small>11:09 PM - 1 Jan 2016</small>
               </div>
@@ -139,7 +139,7 @@ Premium: Rs.330/- per annum per subscriber
             </footer>
           </div>
         </div>
-        <div class="column is-one-third grid-item open">
+        <div class="column is-one-third grid-item open" data-age="2130">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
@@ -157,7 +157,7 @@ Premium: Rs.330/- per annum per subscriber
 Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs. 5000 per month starting at the age of 60 years.
                 <br>
                 <br>
-                <strong>Who : </strong>age group of 18 to 40 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
+                <strong>Who : </strong>age group of 21 to 30 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
                 <br>
                 <small>11:09 PM - 1 Jan 2016</small>
               </div>
@@ -168,7 +168,7 @@ Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs
             </footer>
           </div>
         </div>
-        <div class="column is-one-third grid-item open">
+        <div class="column is-one-third grid-item open" data-age="2131">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
@@ -202,30 +202,5 @@ Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs
   </p>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.2/isotope.pkgd.min.js"></script>
-  <script type="text/javascript">
-    var $grid = $('.grid').isotope({
-      // options
-      itemSelector: '.grid-item',
-      layoutMode: 'fitRows'
-    })
-    var allCategory = '.open, .obc, .scst, .bpt, .disability'
-    $grid.isotope({ filter: allCategory })
-
-    var category = []
-
-    $("#caste-category :checkbox").change(function() {
-      var elemClass = '.' + this.id
-
-      if (this.checked) {
-        category.push(elemClass)
-      } else {
-        var index = category.indexOf(index)
-        category.splice(index, 1)
-      }
-
-      $grid.isotope({ filter: category.join('') })
-
-      console.log(category)
-    });
-  </script>
+  <script type="text/javascript" src="js/schemes.js"></script>
 </html>
