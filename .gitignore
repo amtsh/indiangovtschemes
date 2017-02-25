@@ -1,5 +1,4 @@
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
@@ -26,3 +25,8 @@ nbdist/
 
 # ansible
 ansible/site.retry
+
+logs/
+build/
+bower_components/
+
