@@ -1,0 +1,3 @@
+1. migrate isotope fro jquery to angular (https://github.com/mankindsoftware/angular-isotope.git)
+2. scheme should have a active field to denote whether the scheme is discontinued by government
+3. fix layout issues
