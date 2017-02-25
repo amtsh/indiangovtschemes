@@ -1,0 +1,21 @@
+{
+  "name": "indiangovtschemes",
+  "homepage": "https://github.com/amtsh/indiangovtschemes",
+  "authors": [
+    "Amit Shinde shinde13amit@gmail.com"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "jquery": "^3.1.1",
+    "isotope": "^3.0.2",
+    "bulma": "^0.3.1"
+  }
+}
