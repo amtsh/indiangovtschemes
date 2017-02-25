@@ -1,4 +1,4 @@
-package com.amitshinde;
+package com.yojna;
 
 
 import org.springframework.data.annotation.Id;
@@ -16,7 +16,7 @@ public class Scheme {
   private Description description;
   private String category;
   private String schemesource;
-  private List<String> tags;
+  private Filters filters;
 
   public void setTitle(String title) {
     this.title = title;
@@ -30,12 +30,12 @@ public class Scheme {
     this.category = category;
   }
 
-  public void setSchemesource(String schemesource) {
-    this.schemesource = schemesource;
+  public void setFilters(Filters filters) {
+    this.filters = filters;
   }
 
-  public void setTags(List tags) {
-    this.tags = tags;
+  public void setSchemesource(String schemesource) {
+    this.schemesource = schemesource;
   }
 
   public String getTitle() {
@@ -54,8 +54,6 @@ public class Scheme {
     return this.schemesource;
   }
 
-  public List getTags() {
-    return this.tags;
-  }
+  public Filters getFilters() { return this.filters; }
 
 }
