@@ -1,7 +1,41 @@
-angular.module('app').controller('MainCtrl', ['$scope', 'apiService', function($scope, apiService) {
+angular.module('adminapp').controller('MainCtrl', ['$scope', 'apiService', function($scope, apiService) {
 
-  $scope.scheme = {}
+  $scope.scheme = {
+    title: '',
+    description: {
+      what: '',
+      who: '',
+      date: ''
+    },
+    schemesource: '',
+    filters: {
+      gender: {
+        male: false,
+        female: false
+      },
+      categories: {
+        bpt: false,
+        disability: false,
+        obc: false,
+        open: false,
+        scst: false
+      },
+      age_range: {
+        from: '',
+        to:  ''
+      }
+    }
+  }
+
   $scope.schemes = []
+
+  $scope.categories = {
+    open: "Open",
+    obc: "OBC",
+    scst: "SC/ST",
+    bpt: "Below Poverty Line",
+    disability: "Disabled Person"
+  }
 
   // get schemes by using apiService
   $scope.getSchemes = function() {

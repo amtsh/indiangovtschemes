@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="adminapp">
 <head>
     <meta charset="UTF-8">
-    <title>Govt Schemes Management</title>
+    <title>Yojana - Govt Schemes Management</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
     <style type="text/css">
       body {
@@ -59,40 +59,47 @@
     <input class="input" type="text" placeholder="https://india.gov.in/document/12" ng-model="scheme.schemesource">
   </p>
 
-  <label class="label">Tags</label>
-  <p class="control" id="caste-category">
-    <label class="checkbox">
-      <input id="open" type="checkbox">
-      Open
-    </label>
+  <hr style="margin-right: 5em">
 
-    <label class="checkbox">
-      <input id="obc" type="checkbox">
-      OBC
-    </label>
+  <h3 class="title">Filters</h3>
 
-    <label class="checkbox">
-      <input id="scst" type="checkbox">
-      SC/ST
-    </label>
+  <p id="filters" class="controls">
+    <label class="label">Gender</label>
+    <p class="control">
+      <label class="checkbox">
+        <input type="checkbox" name="gender" value="male" ng-model="scheme.filters.gender.male">
+        Male
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="gender" value="female" ng-model="scheme.filters.gender.female">
+        Female
+      </label>
+    </p>
 
-    <label class="checkbox">
-      <input id="bpt" type="checkbox">
-      Below Poverty Line
-    </label>
+    <label class="label">Age applicable</label>
+    <p class="control is-grouped">
+      <input class="input" type="text" placeholder="From" ng-model="scheme.filters.age_range.from">
+      &nbsp
+      <input class="input" type="text" placeholder="To" ng-model="scheme.filters.age_range.to">
+    </p>
 
-    <label class="checkbox">
-      <input id="disability" type="checkbox">
-      Disabled person
-    </label>
+    <label class="label">Choose category applicable</label>
+    <p class="control" id="caste-category">
+      <label class="checkbox" ng-repeat="(key, value) in categories track by $index">
+        <input type="checkbox" ng-model="scheme.filters.categories[key]">
+        {{value}}
+      </label>
+    </p>
   </p>
+
+  <hr style="margin-right: 5em">
 
   <div class="control is-grouped submit-cancel">
     <p class="control">
       <button class="button is-primary" ng-click="submitScheme(scheme)">Submit</button>
     </p>
     <p class="control">
-      <button class="button is-link" ng-click="resetForm()">Cancel</button>
+      <button class="button is-link" ng-click="resetForm()">Reset</button>
     </p>
   </div>
 </div>
@@ -143,11 +150,6 @@
   </p>
 </div>
 
-
-<!--<script type="text/javascript" src="js/lodash_4.17.4.js"></script>-->
-<!--<script type="text/javascript" src="js/angular_1.6.1.js"></script>-->
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 
 

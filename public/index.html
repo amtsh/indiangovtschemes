@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="public-app">
 <head>
-  <title>Goverment Schemes</title>
+  <title>Yojana - Goverment Schemes</title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
 </head>
 <style type="text/css">
@@ -22,71 +22,81 @@
 
 </style>
 <body>
+  <div id="filters">
+    <label class="label">Gender</label>
+    <p class="button-group control" data-filter-group="gender">
+      <label class="radio">
+        <input type="radio" name="gender" data-filter=".male">
+        Male
+      </label>
+      <label class="radio">
+        <input type="radio" name="gender" data-filter=".female">
+        Female
+      </label>
+    </p>
 
-  <label class="label">Gender</label>
-  <p class="control">
-    <label class="radio">
-      <input type="radio" name="question">
-      Male
-    </label>
-    <label class="radio">
-      <input type="radio" name="question">
-      Female
-    </label>
-  </p>
+    <label class="label">Age</label>
+    <p id="ageFilter" class="button-group control" data-filter-group="age">
+      <a class="button is-white">17</a>
+      <a class="button is-white">18</a>
+      <a class="button is-white">19</a>
+      <a class="button is-white">20</a>
+      <a class="button is-white">21</a>
+      <a class="button is-white">22</a>
+      <a class="button is-white">23</a>
+      <a class="button is-white">24</a>
+      <a class="button is-white">25</a>
+    </p>
 
-  <label class="label">Age</label>
-  <p class="control" id="age-selector">
-    <a class="button is-white">17</a>
-    <a class="button is-white">18</a>
-    <a class="button is-white">19</a>
-    <a class="button is-white">20</a>
-    <a class="button is-white">21</a>
-    <a class="button is-white">22</a>
-    <a class="button is-white">23</a>
-    <a class="button is-white">24</a>
-    <a class="button is-white">25</a>
-  </p>
+    <label class="label">Select category</label>
+    <p class="button-group control" data-filter-group="category">
+      <label class="checkbox">
+        <input type="checkbox" data-filter=".open">
+        Open
+      </label>
 
-  <label class="label">Select category</label>
-  <p class="control" id="category-selector">
-    <label class="checkbox">
-      <input type="checkbox" value=".open">
-      Open
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" data-filter=".obc">
+        OBC
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" value=".obc">
-      OBC
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" data-filter=".scst">
+        SC/ST
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" value=".scst">
-      SC/ST
-    </label>
+      <label class="checkbox">
+        <input type="checkbox" data-filter=".bpt">
+        Below Poverty Line
+      </label>
 
-    <label class="checkbox">
-      <input type="checkbox" value=".bpt">
-      Below Poverty Line
-    </label>
-
-    <label class="checkbox">
-      <input type="checkbox" value=".disability">
-      Disabled person
-    </label>
-  </p>
+      <label class="checkbox">
+        <input type="checkbox" data-filter=".disability">
+        Disabled person
+      </label>
+    </p>
+  </div>
 
   <hr style="margin-top: 5em; margin-right: 5em">
 
   <label class="label">Schemes</label>
   <p class="control">
-    <div class="schemes">
-      <div class="columns grid">
-        <div class="column is-one-third grid-item scst" data-age="1870">
+    <div class="schemes" ng-controller="MainCtrl">
+      <div class="columns grid" ng-repeat="scheme in schemes">
+        <div class="column is-one-third grid-item"
+          data-age="{{ scheme.filters.age_range.from }}{{ scheme.filters.age_range.to }}"
+          ng-class="{
+          'male': scheme.filters.gender.male,
+          'female': scheme.filters.gender.female,
+          'open': scheme.filters.categories.open,
+          'obc': scheme.filters.categories.obc,
+          'scst': scheme.filters.categories.scst,
+          'bpt': scheme.filters.categories.bpt,
+          'disability': scheme.filters.categories.disability}">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
-                Pradhan Mantri Suraksha Bima Yojana (PMSBY)
+                {{ scheme.title }}
               </p>
               <a class="card-header-icon">
                 <span class="icon">
@@ -96,99 +106,12 @@
             </header>
             <div class="card-content">
               <div class="content">
-                <strong>What : </strong>Life Insurance - accidental death (Cover of 2 lakh) cum disability (Cover of 1 lakh) Premium: Rs. 12/- per annum per subscriber
+                <strong>What : </strong>{{ scheme.description.what }}
                 <br>
                 <br>
-                <strong>Who : </strong>age group of 18 to 70 years. Should be savings bank account holder.
+                <strong>Who : </strong>{{ scheme.description.who }}
                 <br>
-                <small>11:09 PM - 1 Jan 2016</small>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">How to apply</a>
-              <a class="card-footer-item">Read more</a>
-            </footer>
-          </div>
-        </div>
-        <div class="column is-one-third grid-item open" data-age="1770">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                Pradhan Mantri Jeevan Jyoti Bima (PMJJBY)
-              </p>
-              <a class="card-header-icon">
-                <span class="icon">
-                  <i class="fa fa-angle-down"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <strong>What : </strong>Life Insurance - covering death due to any reason (Cover of 2 lakh)
-Premium: Rs.330/- per annum per subscriber
-                <br>
-                <br>
-                <strong>Who : </strong>age group of 17 to 70 years. Should be savings bank account holder.
-                <br>
-                <small>11:09 PM - 1 Jan 2016</small>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">How to apply</a>
-              <a class="card-footer-item">Read more</a>
-            </footer>
-          </div>
-        </div>
-        <div class="column is-one-third grid-item open" data-age="2130">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                The Atal Pension Yojana (APY)
-              </p>
-              <a class="card-header-icon">
-                <span class="icon">
-                  <i class="fa fa-angle-down"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <strong>What : </strong>Pension scheme for unorganised sector
-Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs. 5000 per month starting at the age of 60 years.
-                <br>
-                <br>
-                <strong>Who : </strong>age group of 21 to 30 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
-                <br>
-                <small>11:09 PM - 1 Jan 2016</small>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">How to apply</a>
-              <a class="card-footer-item">Read more</a>
-            </footer>
-          </div>
-        </div>
-        <div class="column is-one-third grid-item open" data-age="2131">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                The Atal Pension Yojana (APY)
-              </p>
-              <a class="card-header-icon">
-                <span class="icon">
-                  <i class="fa fa-angle-down"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <strong>What : </strong>Pension scheme for unorganised sector
-Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs. 5000 per month starting at the age of 60 years.
-                <br>
-                <br>
-                <strong>Who : </strong>age group of 18 to 40 years. Should be savings bank account holder, are not members of any statutory social security scheme, not income tax payers
-                <br>
-                <small>11:09 PM - 1 Jan 2016</small>
+                <small>{{ scheme.description.date }}</small>
               </div>
             </div>
             <footer class="card-footer">
@@ -200,7 +123,43 @@ Provides subscribers a fixed minimum pension of Rs. 1000, 2000, 3000, 4000 or Rs
       </div>
     </div>
   </p>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('public-app', [])
+
+    app.factory('apiService', ['$http', function($http) {
+      var urlBase = '/schemes'
+
+      var service = {
+        getSchemes: getSchemes
+      }
+
+      function getSchemes() {
+        return $http.get(urlBase)
+      }
+
+      return service
+    }])
+
+    app.controller('MainCtrl', ['$scope', 'apiService', function($scope, apiService) {
+      // get schemes by using apiService
+      var getSchemes = function() {
+        apiService.getSchemes()
+          .then(function (response) {
+            if (response.status == 200) {
+              $scope.schemes = response.data._embedded.schemes
+              console.log($scope.schemes)
+            }
+          }, function(error) {
+          })
+      }
+
+      getSchemes()
+    }])
+
+  </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.2/isotope.pkgd.min.js"></script>
   <script type="text/javascript" src="js/schemes.js"></script>
+  </body>
 </html>

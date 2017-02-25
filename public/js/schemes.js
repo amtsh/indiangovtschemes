@@ -1,51 +1,81 @@
 var $grid;
+var filters = {}
 var categories = '.open, .obc, .scst, .bpt, .disability';
 var activeCategory = [];
 var currentAge;
 
-initializeGrid()
-arrangeGrid()
-
+$( document ).ready(function() {
+    initializeGrid()
+});
 
 // Grid functions
 
 function initializeGrid() {
   $grid = $('.grid').isotope({
     itemSelector: '.grid-item',
-    layoutMode: 'fitRows'
+    layoutMode: 'fitRows',
+    filter: function() {
+      var isMatched = true
+      var $this = $(this)
+
+      for (var prop in filters) {
+        var filter = filters[prop]
+        // test each filter
+        if ( filter ) {
+          isMatched = isMatched && $(this).is( filter );
+        }
+
+        // break if not matched
+        if ( !isMatched ) {
+          break;
+        }
+      }
+      return isMatched
+    }
   });
 }
 
-function arrangeGrid(filterCondition) {
-  $grid.isotope({ filter: filterCondition });
-}
-
-
 // Listeners
 
-$("#category-selector :checkbox").change(function() {
-  var categorySelector = this.value
+$('#filters').on( 'click', 'input', function() {
+  var $this = $(this)
 
-  if (this.checked) {
-    activeCategory.push(categorySelector)
-  } else {
-    var index = activeCategory.indexOf(categorySelector)
-    activeCategory.splice(index, 1)
+  // get group key
+  var $buttonGroup = $this.parents('.button-group');
+  var filterGroup = $buttonGroup.attr('data-filter-group');
+
+
+  switch(filterGroup) {
+    case 'gender':
+      filters[ filterGroup ] = $this.attr('data-filter')
+      break;
+    case 'age':
+      break;
+    case 'category':
+      var category = $this.attr('data-filter')
+      if (this.checked) {
+        activeCategory.push(category)
+      } else {
+        var index = activeCategory.indexOf(category)
+        activeCategory.splice(index, 1)
+      }
+      filters[ filterGroup ] = activeCategory.join('')
+      break;
   }
-
-  arrangeGrid(activeCategory.join(''))
+  $grid.isotope();
 })
 
-$("#age-selector a").click(function() {
+$("#ageFilter a").click(function() {
   currentAge = parseInt($(this).text())
-  arrangeGrid(ageFilter)
+  filters[ 'age' ] = ageFilter
+  $grid.isotope();
 });
 
 var ageFilter = function() {
   var ageRange = $(this).attr('data-age')
+
   var startAge = parseInt(ageRange.substr(0, 2))
   var endAge = parseInt(ageRange.substr(2, 2))
-
   var isAgeInRange = currentAge >= startAge && currentAge <= endAge
   return isAgeInRange
 }

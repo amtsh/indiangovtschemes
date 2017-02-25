@@ -1,4 +1,4 @@
-angular.module('app').factory('apiService', ['$http', function($http) {
+angular.module('adminapp').factory('apiService', ['$http', function($http) {
 
   var urlBase = '/schemes'
 
@@ -12,12 +12,10 @@ angular.module('app').factory('apiService', ['$http', function($http) {
       deleteScheme: deleteScheme
   };
 
-  // get schemes from api by using Restangular
   function getSchemes() {
       return $http.get(urlBase)
   }
 
-  // get scheme with given id from api by using Restangular
   function getScheme(schemeId) {
       return $http.get(urlBase + '/' + schemeId)
   }
