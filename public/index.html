@@ -82,9 +82,9 @@
   <label class="label">Schemes</label>
   <p class="control">
     <div class="schemes" ng-controller="MainCtrl">
-      <div class="columns grid" ng-repeat="scheme in schemes">
+      <div class="columns is-multiline grid">
         <div class="column is-one-third grid-item"
-          data-age="{{ scheme.filters.age_range.from }}{{ scheme.filters.age_range.to }}"
+          ng-repeat="scheme in schemes"
           ng-class="{
           'male': scheme.filters.gender.male,
           'female': scheme.filters.gender.female,
@@ -92,7 +92,8 @@
           'obc': scheme.filters.categories.obc,
           'scst': scheme.filters.categories.scst,
           'bpt': scheme.filters.categories.bpt,
-          'disability': scheme.filters.categories.disability}">
+          'disability': scheme.filters.categories.disability}"
+          data-age="{{ scheme.filters.age_range.from }}{{ scheme.filters.age_range.to }}">
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
