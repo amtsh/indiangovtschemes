@@ -5,7 +5,7 @@ var activeCategory = [];
 var currentAge;
 
 $( document ).ready(function() {
-    initializeGrid()
+    setTimeout(initializeGrid, 2000);
 });
 
 // Grid functions
