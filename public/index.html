@@ -6,9 +6,17 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
 </head>
 <style type="text/css">
-  body {
+  .heading {
+    margin-left: 5em;
+    margin-top: 3em;
+    text-transform: none;
+  }
+  .body {
     margin-left: 5em;
     margin-top: 5em;
+  }
+  #filters {
+    margin-left: 2em;
   }
   label.checkbox {
     margin-right: 25px;
@@ -23,7 +31,15 @@
 
 </style>
 <body>
-  <div id="filters">
+  <div class="heading">
+    <h1 class="title">Yojana</h1>
+    <h2 class="subtitle">
+      Indian government schemes for you
+    </h2>
+  </div>
+  <div class="body">
+    <h4 class="title is-4">Choose Filters</h4>
+    <div class="container" id="filters">
     <label class="label">Gender</label>
     <p class="button-group control" data-filter-group="gender">
       <label class="radio">
@@ -78,53 +94,55 @@
     </p>
   </div>
 
-  <hr style="margin-top: 5em; margin-right: 5em">
+    <hr style="margin-top: 5em; margin-right: 5em">
+    <h4 class="title is-4">Schemes</h4>
 
-  <label class="label">Schemes</label>
-  <p class="control">
-    <div class="schemes" ng-controller="MainCtrl">
-      <div class="columns is-multiline grid">
-        <div class="column is-one-third grid-item"
-          ng-repeat="scheme in schemes"
-          ng-class="{
-          'male': scheme.filters.gender.male,
-          'female': scheme.filters.gender.female,
-          'open': scheme.filters.categories.open,
-          'obc': scheme.filters.categories.obc,
-          'scst': scheme.filters.categories.scst,
-          'bpt': scheme.filters.categories.bpt,
-          'disability': scheme.filters.categories.disability}"
-          data-age="{{ scheme.filters.age_range.from }}{{ scheme.filters.age_range.to }}">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                {{ scheme.title }}
-              </p>
-              <a class="card-header-icon">
-                <span class="icon">
-                  <i class="fa fa-angle-down"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <strong>What : </strong>{{ scheme.description.what }}
-                <br>
-                <br>
-                <strong>Who : </strong>{{ scheme.description.who }}
-                <br>
-                <small>{{ scheme.description.date }}</small>
+    <!-- <label class="label">Schemes</label> -->
+    <p class="control">
+      <div class="schemes" ng-controller="MainCtrl">
+        <div class="columns is-multiline grid">
+          <div class="column is-one-third grid-item"
+            ng-repeat="scheme in schemes"
+            ng-class="{
+            'male': scheme.filters.gender.male,
+            'female': scheme.filters.gender.female,
+            'open': scheme.filters.categories.open,
+            'obc': scheme.filters.categories.obc,
+            'scst': scheme.filters.categories.scst,
+            'bpt': scheme.filters.categories.bpt,
+            'disability': scheme.filters.categories.disability}"
+            data-age="{{ scheme.filters.age_range.from }}{{ scheme.filters.age_range.to }}">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  {{ scheme.title }}
+                </p>
+                <a class="card-header-icon">
+                  <span class="icon">
+                    <i class="fa fa-angle-down"></i>
+                  </span>
+                </a>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <strong>What : </strong>{{ scheme.description.what }}
+                  <br>
+                  <br>
+                  <strong>Who : </strong>{{ scheme.description.who }}
+                  <br>
+                  <small>{{ scheme.description.date }}</small>
+                </div>
               </div>
+              <footer class="card-footer">
+                <a class="card-footer-item">How to apply</a>
+                <a class="card-footer-item" target="_blank" href="{{ scheme.schemesource }}">Read more</a>
+              </footer>
             </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">How to apply</a>
-              <a class="card-footer-item" target="_blank" href="{{ scheme.schemesource }}">Read more</a>
-            </footer>
           </div>
         </div>
       </div>
-    </div>
-  </p>
+    </p>
+  </div>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
   <script type="text/javascript">
     var app = angular.module('public-app', [])
